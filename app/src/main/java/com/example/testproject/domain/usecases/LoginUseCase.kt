@@ -5,7 +5,7 @@ import com.example.testproject.domain.repositories.AuthenticationRepository
 class LoginUseCase constructor(
     private val authenticationRepository: AuthenticationRepository
 ) {
-    fun login() {
+    suspend fun login() {
         authenticationRepository.login()
     }
 }

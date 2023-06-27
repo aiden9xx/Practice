@@ -1,9 +1,14 @@
 package com.example.testproject.network
 
-import com.example.testproject.data.model.Weather
+import com.example.testproject.domain.entities.News
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("weather?q=Helsinki&units=metric")
-    suspend fun getForecast(): Weather
+    @GET("top-headlines")
+    suspend fun getNews(): Response<News>
+
+    companion object {
+        const val NEWS_API_URL = "https://newsapi.org/v2/"
+    }
 }

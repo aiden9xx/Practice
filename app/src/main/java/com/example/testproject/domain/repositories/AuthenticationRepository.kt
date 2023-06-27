@@ -1,6 +1,9 @@
 package com.example.testproject.domain.repositories
 
+import com.example.testproject.domain.entities.News
+import retrofit2.Response
+
 interface AuthenticationRepository {
-    fun login(): Boolean
-    fun register()
+    suspend fun login(): Response<News>
+    suspend fun register()
 }

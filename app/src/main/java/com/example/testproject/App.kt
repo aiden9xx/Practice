@@ -2,6 +2,7 @@ package com.example.testproject
 
 import android.app.Application
 import com.example.testproject.di.appModule
+import com.example.testproject.di.networkModule
 import com.example.testproject.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
@@ -12,7 +13,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(appModule, repositoryModule)
+            modules(appModule, repositoryModule, networkModule)
         }
     }
 }
