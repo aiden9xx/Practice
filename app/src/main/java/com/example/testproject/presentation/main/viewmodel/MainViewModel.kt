@@ -1,20 +1,31 @@
 package com.example.testproject.presentation.main.viewmodel
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.utils.Utils
 import com.example.testproject.LoginUseCase
+import com.example.testproject.data.model.Article
 import kotlinx.coroutines.launch
 
 class MainViewModel constructor (
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
-    fun testPrint() {
+    private val _news = MutableLiveData<List<Article>>()
+    val news: LiveData<List<Article>> = _news
+
+    fun getArticles() {
         viewModelScope.launch {
             val login = loginUseCase.login()
-            Log.d("hailpt", " ===> Hair ${Utils.getValue()}")
+            when(login.body()?.status) {
+                "ok" -> {
+                    _news.value = login.body()?.articles
+                }
+                else -> {
+                    _news.value = mutableListOf()
+                }
+            }
         }
     }
 
